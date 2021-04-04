@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+<!-- hikari cp data source configuration -->
+
+<bean id="hkcp" class="com.zaxxer.hikari.HikariDataSource">
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe "/>
+<property name="username" value="system"/>
+<property name="password" value="manager"/>
+</bean>
+
+<!-- jdbc template configuration -->
+<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+<property name="dataSource" ref="hkcp"/>
+</bean>
+
+<!-- DAO  configuration -->
+<bean id="custDAO" class="com.pk.dao.EmployeeDAOImpl">
+<constructor-arg ref="jt"/>
+</bean>
+
+
+
+
+</beans>
